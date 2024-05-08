@@ -1,0 +1,22 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'app/style.css' %}">
+
+<form action="{% url 'course' %}">
+    <select name="date">
+        {% for date in dates %}
+            <option>{{ date }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Поиск">
+</form>
+
+{% for currency in currencies %}
+    <div class="wrapper">
+        <p class="currency">{{ currency.name }}</p>
+        <div class="value">
+            {% for course in currency.courses.all %}
+                <p >{{ course.value }}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}

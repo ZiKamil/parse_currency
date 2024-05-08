@@ -1,0 +1,17 @@
+p {
+    font-weight: bold;
+}
+.wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.currency {
+    padding: 5px;
+}
+
+.value {
+    padding: 5px;
+}
+
+
