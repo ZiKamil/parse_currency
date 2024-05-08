@@ -19,13 +19,15 @@ class Command(BaseCommand):
         currencies: dict = data.get('Valute')
 
         currencies_list: list[Currency] = Currency.objects.all()
-        if not currencies_list:
-            save_data = []
-            for name, fields in currencies.items():
+        currencies_names = [currency.name for currency in currencies_list]
+        save_data = []
+        for name, fields in currencies.items():
+            if name not in currencies_names:
                 save_data.append(Currency(
                     char_code=fields.get('CharCode'),
                     name=name,
                 ))
+        if save_data:
             try:
                 currencies_list = Currency.objects.bulk_create(save_data)
             except Exception as e:
